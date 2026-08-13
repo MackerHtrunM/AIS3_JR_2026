@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIS3 JR Crypto</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-buttons">
+            <button class="nav-btn" id="btn-intro">首頁</button>
+            <button class="nav-btn" id="btn-caesar">凱撒密碼</button>
+            <button class="nav-btn" id="btn-vigenere">維吉尼亞</button>
+            <button class="nav-btn" id="btn-columnar">欄位轉換</button>
+            <button class="nav-btn" id="btn-base64">Base64</button>
+            <button class="nav-btn" id="btn-rsa">RSA 破解</button>
+            <button class="nav-btn" id="btn-cisco7">Cisco IOS Type 7</button>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+
+
+    <!-- ============================= 首頁 ============================= -->
+
+    <div id="intro" class="panel">
+
+        <section class="hero">
+            <div class="hero-left">
+                <h2 id="decrypt-text"></h2>
+                <p class="hero-lead">
+                    密碼學輔助解碼工具。貼上一段密文，讓它猜猜看是什麼；
+                    或直接從下面挑一個工具開始。
+                </p>
+
+                <div class="detect-box">
+                    <input type="text" id="detect-input" class="input-field detect-input"
+                           placeholder="貼上密文，例如 SGVsbG8gV29ybGQ=" autocomplete="off">
+                    <button id="detect-submit" class="action-btn">自動偵測</button>
+                </div>
+
+                <div id="detect-result" class="detect-result"></div>
+            </div>
+
+            <div class="svg-frame">
+                <svg style="--i:-2; --j:1" viewBox="0 0 344 344" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <g class="out2"><circle cx="172" cy="172" r="150" stroke-width="1.2"/></g>
+                    <g class="out3"><circle cx="172" cy="172" r="128" stroke-width="1.4" stroke-dasharray="4 10"/></g>
+                    <g class="inner1"><polygon points="172,86 245,129 245,215 172,258 99,215 99,129" stroke-width="1.2"/></g>
+                    <g class="inner3"><polygon points="172,108 236,172 172,236 108,172" stroke-width="1"/></g>
+                    <g class="center"><circle class="center1" cx="172" cy="172" r="16"/></g>
+                </svg>
+                <svg style="--i:-1; --j:2" viewBox="0 0 344 344" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <g class="out2"><circle cx="172" cy="172" r="150" stroke-width="1.2"/></g>
+                    <g class="out3"><circle cx="172" cy="172" r="128" stroke-width="1.4" stroke-dasharray="4 10"/></g>
+                    <g class="inner1"><polygon points="172,86 245,129 245,215 172,258 99,215 99,129" stroke-width="1.2"/></g>
+                    <g class="inner3"><polygon points="172,108 236,172 172,236 108,172" stroke-width="1"/></g>
+                    <g class="center"><circle class="center1" cx="172" cy="172" r="16"/></g>
+                </svg>
+                <svg style="--i:0; --j:3" viewBox="0 0 344 344" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <g class="out2"><circle cx="172" cy="172" r="150" stroke-width="1.2"/></g>
+                    <g class="out3"><circle cx="172" cy="172" r="128" stroke-width="1.4" stroke-dasharray="4 10"/></g>
+                    <g class="inner1"><polygon points="172,86 245,129 245,215 172,258 99,215 99,129" stroke-width="1.2"/></g>
+                    <g class="inner3"><polygon points="172,108 236,172 172,236 108,172" stroke-width="1"/></g>
+                    <g class="center"><circle class="center1" cx="172" cy="172" r="16"/></g>
+                </svg>
+                <svg style="--i:1; --j:4" viewBox="0 0 344 344" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <g class="out2"><circle cx="172" cy="172" r="150" stroke-width="1.2"/></g>
+                    <g class="out3"><circle cx="172" cy="172" r="128" stroke-width="1.4" stroke-dasharray="4 10"/></g>
+                    <g class="inner1"><polygon points="172,86 245,129 245,215 172,258 99,215 99,129" stroke-width="1.2"/></g>
+                    <g class="inner3"><polygon points="172,108 236,172 172,236 108,172" stroke-width="1"/></g>
+                    <g class="center"><circle class="center1" cx="172" cy="172" r="16"/></g>
+                </svg>
+                <svg style="--i:2; --j:5" viewBox="0 0 344 344" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <g class="out2"><circle cx="172" cy="172" r="150" stroke-width="1.2"/></g>
+                    <g class="out3"><circle cx="172" cy="172" r="128" stroke-width="1.4" stroke-dasharray="4 10"/></g>
+                    <g class="inner1"><polygon points="172,86 245,129 245,215 172,258 99,215 99,129" stroke-width="1.2"/></g>
+                    <g class="inner3"><polygon points="172,108 236,172 172,236 108,172" stroke-width="1"/></g>
+                    <g class="center"><circle class="center1" cx="172" cy="172" r="16"/></g>
+                </svg>
+            </div>
+        </section>
+
+
+
+
+        <!-- 工具卡片 -->
+        <section class="tools-section">
+            <h3 class="section-title">選擇工具</h3>
+
+            <div class="tool-grid">
+
+                <button class="tool-card" data-target="caesar">
+                    <svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M20 12a8 8 0 1 1-2.34-5.66"/>
+                        <path d="M20 3v4h-4"/>
+                    </svg>
+                    <span class="tool-name">凱撒密碼</span>
+                    <span class="tool-tag">單表替換</span>
+                    <span class="tool-desc">每個字母沿字母表移動固定格數，金鑰只有 0–25 共 26 種，可直接暴力破解。</span>
+                </button>
+
+                <button class="tool-card" data-target="vigenere">
+                    <svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="1"/>
+                        <path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>
+                    </svg>
+                    <span class="tool-name">維吉尼亞</span>
+                    <span class="tool-tag">多表替換</span>
+                    <span class="tool-desc">用金鑰逐字決定位移量，同一個字母在不同位置會變成不同結果，字頻分析失效。</span>
+                </button>
+
+                <button class="tool-card" data-target="columnar">
+                    <svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 8v13M12 8v13M18 8v13"/>
+                        <path d="M4 5h16"/>
+                        <path d="M17 2l3 3-3 3"/>
+                    </svg>
+                    <span class="tool-name">欄位轉換</span>
+                    <span class="tool-tag">移位式</span>
+                    <span class="tool-desc">不改變任何字母，只依金鑰的字母順序重排位置，因此字頻與原文完全相同。</span>
+                </button>
+
+                <button class="tool-card" data-target="base64">
+                    <svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M9 5l-6 7 6 7M15 5l6 7-6 7"/>
+                    </svg>
+                    <span class="tool-name">Base64</span>
+                    <span class="tool-tag">編碼，不是加密</span>
+                    <span class="tool-desc">把位元組轉成 64 個可列印字元以便傳輸。沒有金鑰，任何人都能還原，不提供保密性。</span>
+                </button>
+
+                <button class="tool-card" data-target="rsa">
+                    <svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="8" cy="12" r="4.5"/>
+                        <path d="M12.5 12H22M18 12v4M21 12v3"/>
+                    </svg>
+                    <span class="tool-name">RSA 破解</span>
+                    <span class="tool-tag">公鑰系統</span>
+                    <span class="tool-desc">安全性建立在分解大整數的困難上。若 N 夠小或 p、q 太接近，分解後即可還原私鑰。</span>
+                </button>
+
+            </div>
+        </section>
+    </div>
+
+
+
+
+
+
+
+    <!-- ============================= 凱撒 ============================= -->
+
+    <div id="caesar" class="panel">
+        <h2>凱撒密碼</h2>
+
+        <div class="field">
+            <label for="inputText">文字</label>
+            <input type="text" id="inputText" name="inputText" class="input-field"
+                   placeholder="輸入要處理的文字" autocomplete="off">
+        </div>
+
+        <div class="field">
+            <label for="caesarMode">模式</label>
+            <select id="caesarMode" class="input-field">
+                <option value="known">自訂位移量</option>
+                <option value="bruteforce">全部輸出（暴力破解）</option>
+            </select>
+        </div>
+
+        <div class="field" id="shiftArea">
+            <label for="shift">位移量</label>
+            <input type="number" id="shift" name="shift" class="input-field"
+                   min="0" max="25" step="1" value="3">
+        </div>
+
+        <div class="field">
+            <button id="caesar-submit" class="action-btn">執行</button>
+        </div>
+
+        <div id="result" class="result-area">結果會顯示在這裡</div>
+    </div>
+
+
+
+
+
+
+
+
+    <!-- ============================= 維吉尼亞 ============================= -->
+
+    <div id="vigenere" class="panel">
+        <h2>維吉尼亞密碼</h2>
+
+        <div class="field">
+            <label for="vigenere-input">文字</label>
+            <input type="text" id="vigenere-input" class="input-field"
+                   placeholder="輸入要處理的文字" autocomplete="off">
+        </div>
+
+        <div class="field">
+            <label for="vigenere-key">金鑰</label>
+            <input type="text" id="vigenere-key" class="input-field"
+                   placeholder="僅限英文字母，例如 LEMON" autocomplete="off">
+        </div>
+
+        <div class="field">
+            <label for="vigenere-mode">模式</label>
+            <select id="vigenere-mode" class="input-field">
+                <option value="encrypt">加密</option>
+                <option value="decrypt">解密</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <button id="vigenere-submit" class="action-btn">執行</button>
+        </div>
+
+        <p class="field-hint">非英文字母（空格、標點、數字）會原樣保留，且不消耗金鑰字元。</p>
+
+        <div id="vigenere-result" class="result-area">結果會顯示在這裡</div>
+    </div>
+
+
+
+
+
+
+
+
+    <!-- ============================= 欄位轉換 ============================= -->
+
+    <div id="columnar" class="panel">
+        <h2>欄位轉換密碼</h2>
+
+        <div class="field">
+            <label for="columnar-input">文字</label>
+            <input type="text" id="columnar-input" class="input-field"
+                   placeholder="輸入要處理的文字" autocomplete="off">
+        </div>
+
+        <div class="field">
+            <label for="columnar-key">金鑰</label>
+            <input type="text" id="columnar-key" class="input-field"
+                   placeholder="僅限英文字母，例如 ZEBRAS" autocomplete="off">
+        </div>
+
+        <div class="field">
+            <label for="columnar-mode">模式</label>
+            <select id="columnar-mode" class="input-field">
+                <option value="encrypt">加密</option>
+                <option value="decrypt">解密</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <button id="columnar-submit" class="action-btn">執行</button>
+        </div>
+
+        <p class="field-hint">加密時會移除所有空白字元，因此解密後無法還原原本的斷詞。</p>
+
+        <div id="columnar-result" class="result-area">結果會顯示在這裡</div>
+    </div>
+
+
+
+
+
+
+
+
+    <!-- ============================= Base64 ============================= -->
+
+    <div id="base64" class="panel">
+        <h2>Base64 編解碼</h2>
+
+        <div class="field">
+            <label for="base64-input">文字</label>
+            <input type="text" id="base64-input" name="base64-input" class="input-field"
+                   placeholder="輸入文字或 Base64 字串" autocomplete="off">
+        </div>
+
+        <div class="field">
+            <label for="base64-mode">模式</label>
+            <select id="base64-mode" class="input-field">
+                <option value="encode">編碼</option>
+                <option value="decode">解碼</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <button id="base64-submit" class="action-btn">執行</button>
+        </div>
+
+        <div id="base64-result" class="result-area">結果會顯示在這裡</div>
+    </div>
+
+
+
+
+
+
+
+
+    <!-- ============================= RSA ============================= -->
+
+    <div id="rsa" class="panel">
+        <h2>RSA 破解</h2>
+
+        <div class="field">
+            <label for="rsa-n">模數 N</label>
+            <input type="text" id="rsa-n" class="input-field"
+                   placeholder="p × q 的乘積" autocomplete="off">
+        </div>
+
+        <div class="field">
+            <label for="rsa-e">公鑰 e</label>
+            <input type="text" id="rsa-e" class="input-field"
+                   placeholder="常見為 65537" autocomplete="off">
+        </div>
+
+        <div class="field">
+            <label for="rsa-c">密文 c</label>
+            <input type="text" id="rsa-c" class="input-field"
+                   placeholder="加密後的整數" autocomplete="off">
+        </div>
+
+        <div class="field">
+            <button id="rsa-submit" class="action-btn">開始破解</button>
+        </div>
+
+        <div id="rsa-result" class="result-area">結果會顯示在這裡</div>
+    </div>
+
+
+
+
+
+
+    
+    <!-- ============================= Cisco IOS Type 7 ============================= -->
+
+    <div id="cisco7" class="panel">
+        <h2>Cisco IOS Type 7 密碼還原</h2>
+
+        <div class="field">
+            <label for="cisco7-input">加密字串</label>
+            <input type="text" id="cisco7-input" class="input-field"
+                   placeholder="例如 08351A181C1B1D0725" autocomplete="off">
+        </div>
+
+        <div class="field">
+            <button id="cisco7-submit" class="action-btn">還原密碼</button>
+        </div>
+
+        <p class="field-hint">
+            前兩碼是位移偏移量（0–15），其餘為與固定金鑰表逐字元 XOR 後的十六進位值。
+            這不是真正的加密，只是簡單混淆，任何人取得金鑰表即可還原。
+        </p>
+
+        <div id="cisco7-result" class="result-area">結果會顯示在這裡</div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

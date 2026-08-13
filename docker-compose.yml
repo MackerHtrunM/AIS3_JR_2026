@@ -1,0 +1,30 @@
+services:
+  backend:
+    build: ./backend
+    container_name: ais3jr-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+    ports:
+      # 對外開放，方便直接測 API（curl localhost:3000/api/health）
+      - "3000:3000"
+    networks:
+      - ais3jr
+
+  frontend:
+    build: ./frontend
+    container_name: ais3jr-frontend
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      backend:
+
+        condition: service_healthy
+    networks:
+      - ais3jr
+
+networks:
+  ais3jr:
+    driver: bridge
